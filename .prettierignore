@@ -1,0 +1,9 @@
+coverage
+dist
+node_modules
+pnpm-lock.yaml
+storybook-static
+.turbo
+
+CONSTUCT.md
+DEVELOPMENT_PLAN.md

@@ -1,0 +1,17 @@
+node_modules/
+dist/
+coverage/
+storybook-static/
+.turbo/
+
+.DS_Store
+*.local
+*.log
+
+CONSTUCT.md
+DEVELOPMENT_PLAN.md
+
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
