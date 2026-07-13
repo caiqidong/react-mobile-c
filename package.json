@@ -4,8 +4,9 @@
   "private": true,
   "packageManager": "pnpm@9.15.9",
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build && node scripts/verify-build.mjs",
     "clean": "turbo run clean",
+    "dev": "turbo run dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",

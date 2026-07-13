@@ -12,8 +12,11 @@ pnpm workspaces and Turborepo to manage independently buildable packages.
 
 ```bash
 pnpm install
+pnpm dev
 pnpm build
 ```
+
+The development server starts from the components package and prints the available local URL.
 
 ## Packages
 
@@ -23,6 +26,7 @@ pnpm build
 ## Development commands
 
 ```bash
+pnpm dev
 pnpm build
 pnpm lint
 pnpm typecheck
@@ -30,5 +34,11 @@ pnpm format:check
 pnpm format
 ```
 
-See [DEVELOPMENT_PLAN.md](./DEVELOPMENT_PLAN.md) for milestones and the component development
-workflow.
+## Package styles
+
+Applications using the component package must import the generated stylesheet once at their
+entry point:
+
+```ts
+import '@react-mobile-c/components/style.css';
+```
