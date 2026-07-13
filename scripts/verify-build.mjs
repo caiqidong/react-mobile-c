@@ -26,6 +26,11 @@ if (!esmEntry.mobileRootStyles || !cjsEntry.mobileRootStyles) {
 }
 
 for (const exportName of [
+  'Button',
+  'Icon',
+  'Image',
+  'Input',
+  'Textarea',
   'brandTheme',
   'colors',
   'darkTheme',
@@ -72,6 +77,14 @@ if (
   throw new Error('The production CSS is missing animation or reduced-motion styles.');
 }
 
+if (
+  !css.includes('object-fit: cover') ||
+  !css.includes('cursor: wait') ||
+  !css.includes('focus-within')
+) {
+  throw new Error('The production CSS is missing P0 component styles.');
+}
+
 console.log(
-  `Verified ${expectedFiles.length} build artifacts, module formats, themes, utilities, and motion.`,
+  `Verified ${expectedFiles.length} build artifacts, module formats, themes, utilities, motion, and P0 components.`,
 );

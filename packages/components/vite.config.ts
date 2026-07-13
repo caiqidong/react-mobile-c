@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     dts({
       entryRoot: 'src',
-      exclude: ['src/**/*.test.{ts,tsx}'],
+      exclude: ['src/**/*.stories.tsx', 'src/**/*.test.{ts,tsx}'],
       include: ['src'],
       insertTypesEntry: true,
       outDirs: ['dist'],
