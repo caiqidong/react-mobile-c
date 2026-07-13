@@ -37,6 +37,15 @@ for (const exportName of [
   'slideUp',
   'spacing',
   'textOverflow',
+  'useClickAway',
+  'useControllableValue',
+  'useKeyboard',
+  'useLazyRender',
+  'useLockScroll',
+  'useMountedRef',
+  'useScroll',
+  'useTap',
+  'waitForFont',
 ]) {
   if (!esmEntry[exportName] || !cjsEntry[exportName]) {
     throw new Error(`The ESM or CJS entry is missing the ${exportName} export.`);

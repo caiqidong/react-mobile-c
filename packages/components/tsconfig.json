@@ -8,5 +8,5 @@
     },
     "types": ["node", "vite/client"]
   },
-  "include": ["dev", "src", "vite.config.ts"]
+  "include": ["dev", "src", "vite.config.ts", "vitest.config.ts"]
 }

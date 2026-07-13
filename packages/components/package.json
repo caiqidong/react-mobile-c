@@ -25,6 +25,7 @@
     "clean": "rm -rf dist",
     "dev": "vite",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
@@ -37,10 +38,13 @@
   },
   "devDependencies": {
     "@stylexjs/unplugin": "^0.19",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
     "@types/react": "^18.3",
     "@types/react-dom": "^18.3",
     "@vitejs/plugin-react": "^6",
+    "@vitest/coverage-v8": "^4",
+    "jsdom": "^29.1.1",
     "react": "^18.3",
     "react-dom": "^18.3",
     "terser": "^5.49.0",
