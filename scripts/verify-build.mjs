@@ -25,7 +25,16 @@ if (!esmEntry.mobileRootStyles || !cjsEntry.mobileRootStyles) {
   throw new Error('The ESM or CJS entry did not expose the expected public API.');
 }
 
-for (const exportName of ['colors', 'spacing', 'px2rem']) {
+for (const exportName of [
+  'brandTheme',
+  'colors',
+  'darkTheme',
+  'hairline',
+  'px2rem',
+  'safeArea',
+  'spacing',
+  'textOverflow',
+]) {
   if (!esmEntry[exportName] || !cjsEntry[exportName]) {
     throw new Error(`The ESM or CJS entry is missing the ${exportName} export.`);
   }
@@ -39,6 +48,10 @@ if (!css.includes('#1677ff') || !css.includes('.2133rem')) {
   throw new Error('The production CSS is missing the expected design token values.');
 }
 
+if (!css.includes('#1a1a1a') || !css.includes('#007a5a') || !css.includes('safe-area-inset')) {
+  throw new Error('The production CSS is missing theme or mobile utility styles.');
+}
+
 console.log(
-  `Verified ${expectedFiles.length} build artifacts, both module formats, and design tokens.`,
+  `Verified ${expectedFiles.length} build artifacts, both module formats, themes, and utilities.`,
 );

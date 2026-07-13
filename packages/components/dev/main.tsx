@@ -1,8 +1,8 @@
-import * as stylex from '@stylexjs/stylex';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { mobileRootStyles } from '@/styles/base.stylex';
+import { ThemeDemo } from '@/demo/ThemeDemo';
+import './dev.css';
 
 const rootElement = document.getElementById('root');
 
@@ -12,9 +12,6 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <main {...stylex.props(mobileRootStyles.root)}>
-      <h1>React Mobile C</h1>
-      <p>Vite and StyleX development environment is ready.</p>
-    </main>
+    <ThemeDemo />
   </StrictMode>,
 );
