@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ThemeDemo } from '@/demo/ThemeDemo';
+import { AnimationDemo } from '@/demo/AnimationDemo';
 import './dev.css';
 
 const rootElement = document.getElementById('root');
@@ -12,6 +12,6 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <ThemeDemo />
+    <AnimationDemo />
   </StrictMode>,
 );

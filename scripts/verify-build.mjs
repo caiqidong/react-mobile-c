@@ -29,9 +29,12 @@ for (const exportName of [
   'brandTheme',
   'colors',
   'darkTheme',
+  'fade',
   'hairline',
   'px2rem',
   'safeArea',
+  'scale',
+  'slideUp',
   'spacing',
   'textOverflow',
 ]) {
@@ -52,6 +55,14 @@ if (!css.includes('#1a1a1a') || !css.includes('#007a5a') || !css.includes('safe-
   throw new Error('The production CSS is missing theme or mobile utility styles.');
 }
 
+if (
+  !css.includes('prefers-reduced-motion') ||
+  !css.includes('translateY(100%)') ||
+  !css.includes('scale(.8)')
+) {
+  throw new Error('The production CSS is missing animation or reduced-motion styles.');
+}
+
 console.log(
-  `Verified ${expectedFiles.length} build artifacts, both module formats, themes, and utilities.`,
+  `Verified ${expectedFiles.length} build artifacts, module formats, themes, utilities, and motion.`,
 );
