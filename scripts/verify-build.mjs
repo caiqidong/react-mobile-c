@@ -25,8 +25,20 @@ if (!esmEntry.mobileRootStyles || !cjsEntry.mobileRootStyles) {
   throw new Error('The ESM or CJS entry did not expose the expected public API.');
 }
 
+for (const exportName of ['colors', 'spacing', 'px2rem']) {
+  if (!esmEntry[exportName] || !cjsEntry[exportName]) {
+    throw new Error(`The ESM or CJS entry is missing the ${exportName} export.`);
+  }
+}
+
 if (!css.includes('.rmc')) {
   throw new Error('The StyleX CSS output is missing the configured class name prefix.');
 }
 
-console.log(`Verified ${expectedFiles.length} build artifacts and both module formats.`);
+if (!css.includes('#1677ff') || !css.includes('.2133rem')) {
+  throw new Error('The production CSS is missing the expected design token values.');
+}
+
+console.log(
+  `Verified ${expectedFiles.length} build artifacts, both module formats, and design tokens.`,
+);
