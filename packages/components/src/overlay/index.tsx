@@ -9,7 +9,7 @@ import type { OverlayProps } from './types';
 
 const exitDuration = Number.parseInt(durationValues.base, 10);
 
-export const Overlay = forwardRef<HTMLDivElement, OverlayProps>(
+export const Overlay = /* @__PURE__ */ forwardRef<HTMLDivElement, OverlayProps>(
   (
     {
       children,

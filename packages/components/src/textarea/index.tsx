@@ -14,7 +14,7 @@ const resizeTextarea = (element: HTMLTextAreaElement | null): void => {
   element.style.height = `${element.scrollHeight}px`;
 };
 
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const Textarea = /* @__PURE__ */ forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       autoSize = false,

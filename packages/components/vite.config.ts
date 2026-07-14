@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     dts({
       entryRoot: 'src',
-      exclude: ['src/**/*.stories.tsx', 'src/**/*.test.{ts,tsx}'],
+      exclude: ['src/demo/**', 'src/test/**', 'src/**/*.stories.tsx', 'src/**/*.test.{ts,tsx}'],
       include: ['src'],
       insertTypesEntry: true,
       outDirs: ['dist'],
@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => ({
     },
     minify: 'terser',
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: [/^react(?:\/.*)?$/, /^react-dom(?:\/.*)?$/],
     },
     sourcemap: true,
     target: 'es2017',

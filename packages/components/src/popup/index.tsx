@@ -30,7 +30,7 @@ const closedStyleMap: Record<PopupPosition, keyof typeof styles> = {
   top: 'topClosed',
 };
 
-export const Popup = forwardRef<HTMLDivElement, PopupProps>(
+export const Popup = /* @__PURE__ */ forwardRef<HTMLDivElement, PopupProps>(
   (
     {
       children,

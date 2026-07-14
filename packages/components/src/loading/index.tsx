@@ -5,7 +5,7 @@ import { Overlay } from '../overlay';
 import { styles } from './styles';
 import type { LoadingProps } from './types';
 
-export const Loading = forwardRef<HTMLDivElement, LoadingProps>(
+export const Loading = /* @__PURE__ */ forwardRef<HTMLDivElement, LoadingProps>(
   (
     {
       className,

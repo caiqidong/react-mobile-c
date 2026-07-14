@@ -4,7 +4,7 @@ import { forwardRef, type MouseEvent } from 'react';
 import { styles } from './styles';
 import type { ButtonProps } from './types';
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = /* @__PURE__ */ forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       block = false,

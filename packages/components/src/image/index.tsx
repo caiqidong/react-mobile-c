@@ -12,7 +12,7 @@ const fitStyleMap: Record<ImageFit, keyof typeof fitStyles> = {
   'scale-down': 'scaleDown',
 };
 
-export const Image = forwardRef<HTMLImageElement, ImageProps>(
+export const Image = /* @__PURE__ */ forwardRef<HTMLImageElement, ImageProps>(
   (
     {
       alt = '',

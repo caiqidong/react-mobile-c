@@ -1,10 +1,22 @@
-import { access, readFile } from 'node:fs/promises';
+import {
+  access,
+  mkdir,
+  mkdtemp,
+  readFile,
+  readdir,
+  rm,
+  symlink,
+  writeFile,
+} from 'node:fs/promises';
 import { createRequire } from 'node:module';
+import { tmpdir } from 'node:os';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
+import { gzipSync } from 'node:zlib';
 
 const rootDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputDirectory = path.join(rootDirectory, 'packages/components/dist');
+const componentsDirectory = path.join(rootDirectory, 'packages/components');
 const expectedFiles = [
   'index.cjs',
   'index.cjs.map',
@@ -27,10 +39,15 @@ if (!esmEntry.mobileRootStyles || !cjsEntry.mobileRootStyles) {
 
 for (const exportName of [
   'Button',
+  'Dialog',
   'Icon',
   'Image',
   'Input',
+  'Loading',
+  'Overlay',
+  'Popup',
   'Textarea',
+  'Toast',
   'brandTheme',
   'colors',
   'darkTheme',
@@ -55,6 +72,78 @@ for (const exportName of [
   if (!esmEntry[exportName] || !cjsEntry[exportName]) {
     throw new Error(`The ESM or CJS entry is missing the ${exportName} export.`);
   }
+}
+
+const cssGzipBytes = gzipSync(css).byteLength;
+const cssGzipLimit = 30 * 1024;
+
+if (cssGzipBytes >= cssGzipLimit) {
+  throw new Error(
+    `The production CSS is ${(cssGzipBytes / 1024).toFixed(2)} KiB gzip, exceeding the 30 KiB limit.`,
+  );
+}
+
+const declarationFiles = await readdir(outputDirectory, { recursive: true });
+if (declarationFiles.some((file) => file.startsWith('demo/') || file.startsWith('test/'))) {
+  throw new Error('Internal demo or test declarations leaked into the published package.');
+}
+
+for (const sourceMapFile of ['index.cjs.map', 'index.mjs.map']) {
+  const sourceMap = JSON.parse(await readFile(path.join(outputDirectory, sourceMapFile), 'utf8'));
+  if (!Array.isArray(sourceMap.sources) || sourceMap.sources.length === 0) {
+    throw new Error(`${sourceMapFile} does not contain source mappings.`);
+  }
+}
+
+const temporaryDirectory = await mkdtemp(path.join(tmpdir(), 'react-mobile-c-treeshake-'));
+try {
+  const consumerEntry = path.join(temporaryDirectory, 'entry.mjs');
+  const fullConsumerEntry = path.join(temporaryDirectory, 'full-entry.mjs');
+  const packageScopeDirectory = path.join(temporaryDirectory, 'node_modules/@react-mobile-c');
+  await mkdir(packageScopeDirectory, { recursive: true });
+  await symlink(componentsDirectory, path.join(packageScopeDirectory, 'components'), 'dir');
+  await writeFile(
+    consumerEntry,
+    "import { Button } from '@react-mobile-c/components'; globalThis.ReactMobileC = { Button };",
+  );
+  await writeFile(
+    fullConsumerEntry,
+    "import * as ReactMobileC from '@react-mobile-c/components'; globalThis.ReactMobileC = ReactMobileC;",
+  );
+  const viteRequire = createRequire(path.join(componentsDirectory, 'package.json'));
+  const { build } = await import(pathToFileURL(viteRequire.resolve('vite')).href);
+  const buildConsumer = async (input) => {
+    const result = await build({
+      build: {
+        minify: 'terser',
+        rollupOptions: {
+          external: [/^react(?:\/.*)?$/, /^react-dom(?:\/.*)?$/],
+          input,
+        },
+        write: false,
+      },
+      configFile: false,
+      logLevel: 'silent',
+    });
+    const outputs = Array.isArray(result) ? result : [result];
+    return outputs
+      .flatMap((output) => output.output)
+      .filter((output) => output.type === 'chunk')
+      .map((output) => output.code)
+      .join('\n');
+  };
+  const consumerCode = await buildConsumer(consumerEntry);
+  const fullConsumerCode = await buildConsumer(fullConsumerEntry);
+  const consumerGzipBytes = gzipSync(consumerCode).byteLength;
+  const fullConsumerGzipBytes = gzipSync(fullConsumerCode).byteLength;
+
+  if (!consumerCode || !fullConsumerCode || consumerGzipBytes >= fullConsumerGzipBytes) {
+    throw new Error(
+      `A Button-only consumer did not produce a smaller tree-shaken bundle (${consumerGzipBytes} B vs ${fullConsumerGzipBytes} B gzip).`,
+    );
+  }
+} finally {
+  await rm(temporaryDirectory, { force: true, recursive: true });
 }
 
 if (!css.includes('.rmc')) {
@@ -86,5 +175,5 @@ if (
 }
 
 console.log(
-  `Verified ${expectedFiles.length} build artifacts, module formats, themes, utilities, motion, and P0 components.`,
+  `Verified ${expectedFiles.length} artifacts, ESM/CJS imports, sourcemaps, declaration boundaries, tree shaking, and CSS at ${(cssGzipBytes / 1024).toFixed(2)} KiB gzip.`,
 );

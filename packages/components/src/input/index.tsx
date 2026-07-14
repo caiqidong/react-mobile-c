@@ -5,7 +5,7 @@ import { useControllableValue } from '../hooks';
 import { styles } from './styles';
 import type { InputProps } from './types';
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = /* @__PURE__ */ forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,

@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 import { styles } from './styles';
 import type { IconProps } from './types';
 
-export const Icon = forwardRef<SVGSVGElement, IconProps>(
+export const Icon = /* @__PURE__ */ forwardRef<SVGSVGElement, IconProps>(
   (
     {
       children,
