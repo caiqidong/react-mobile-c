@@ -1,4 +1,5 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { axe } from 'jest-axe';
 import { createElement } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -51,6 +52,12 @@ describe('Button', () => {
     render(<Button disabled>Disabled</Button>);
 
     expect((screen.getByRole('button') as HTMLButtonElement).disabled).toBe(true);
+  });
+
+  it('has no detectable accessibility violations', async () => {
+    const { container } = render(<Button>Continue</Button>);
+
+    expect(await axe(container)).toHaveNoViolations();
   });
 });
 
