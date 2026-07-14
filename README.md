@@ -46,6 +46,9 @@ updates a release pull request; merging that pull request publishes the changed 
 The repository must provide an `NPM_TOKEN` Actions secret with publish access to the
 `@react-mobile-c` scope.
 
+Coverage uploads use GitHub OIDC. Import the repository into Codecov to activate uploads and the
+coverage badge; an unavailable Codecov project does not block the core CI quality gates.
+
 ## Package styles
 
 Applications using the component package must import the generated stylesheet once at their
