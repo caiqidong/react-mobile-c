@@ -13,11 +13,16 @@ export default defineConfig({
       ],
       include: [
         'src/button/**/*.tsx',
+        'src/dialog/**/*.tsx',
         'src/hooks/**/*.ts',
         'src/icon/**/*.tsx',
         'src/image/**/*.tsx',
         'src/input/**/*.tsx',
+        'src/loading/**/*.tsx',
+        'src/overlay/**/*.tsx',
+        'src/popup/**/*.tsx',
         'src/textarea/**/*.tsx',
+        'src/toast/**/*.tsx',
       ],
       provider: 'v8',
       thresholds: {
