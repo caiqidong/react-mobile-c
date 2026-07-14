@@ -1,8 +1,12 @@
 import './style.css';
 
 export type { MobileComponentProps } from '@react-mobile-c/shared';
+export * from './badge';
 export * from './button';
+export * from './card';
+export * from './cell';
 export * from './dialog';
+export * from './divider';
 export * from './hooks';
 export * from './icon';
 export * from './image';
@@ -11,6 +15,7 @@ export * from './loading';
 export * from './overlay';
 export * from './popup';
 export * from './styles';
+export * from './tag';
 export * from './textarea';
 export * from './toast';
 export * from './utils';
