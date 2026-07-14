@@ -109,7 +109,7 @@ importers:
   packages/components:
     dependencies:
       '@react-mobile-c/shared':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../shared
       '@stylexjs/stylex':
         specifier: ^0.19.0
