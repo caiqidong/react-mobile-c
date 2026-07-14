@@ -6,6 +6,7 @@
   "scripts": {
     "build": "turbo run build && node scripts/verify-build.mjs",
     "build:storybook": "pnpm --filter @react-mobile-c/docs build",
+    "changeset": "changeset",
     "clean": "turbo run clean",
     "create:component": "tsx scripts/create-component.ts",
     "dev": "turbo run dev",
@@ -13,11 +14,14 @@
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",
     "prepare": "husky",
+    "release": "pnpm build && changeset publish",
     "storybook": "pnpm --filter @react-mobile-c/docs storybook",
     "test": "turbo run test",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo run typecheck",
+    "version-packages": "changeset version && pnpm install --lockfile-only"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.0",
     "@commitlint/cli": "^21.2.1",
     "@commitlint/config-conventional": "^21.2.0",
     "@eslint/js": "^9.39.5",

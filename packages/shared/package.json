@@ -1,7 +1,6 @@
 {
   "name": "@react-mobile-c/shared",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0-alpha.1",
   "type": "module",
   "files": [
     "dist"
@@ -13,6 +12,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

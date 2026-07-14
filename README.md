@@ -1,5 +1,9 @@
 # React Mobile C
 
+[![CI](https://github.com/caiqidong/react-mobile-c/actions/workflows/ci.yml/badge.svg)](https://github.com/caiqidong/react-mobile-c/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/caiqidong/react-mobile-c/branch/main/graph/badge.svg)](https://codecov.io/gh/caiqidong/react-mobile-c)
+[![npm](https://img.shields.io/npm/v/@react-mobile-c/components.svg)](https://www.npmjs.com/package/@react-mobile-c/components)
+
 A React component library for mobile H5 applications and embedded WebViews. The project uses
 pnpm workspaces and Turborepo to manage independently buildable packages.
 
@@ -32,7 +36,15 @@ pnpm lint
 pnpm typecheck
 pnpm format:check
 pnpm format
+pnpm changeset
 ```
+
+## Release workflow
+
+Add a changeset for every user-facing package change with `pnpm changeset`. Merging to `main`
+updates a release pull request; merging that pull request publishes the changed packages to npm.
+The repository must provide an `NPM_TOKEN` Actions secret with publish access to the
+`@react-mobile-c` scope.
 
 ## Package styles
 

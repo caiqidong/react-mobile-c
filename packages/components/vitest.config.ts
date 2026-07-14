@@ -25,6 +25,7 @@ export default defineConfig({
         'src/toast/**/*.tsx',
       ],
       provider: 'v8',
+      reporter: ['text', 'html', 'json', 'lcov'],
       thresholds: {
         branches: 70,
         functions: 70,
