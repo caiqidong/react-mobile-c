@@ -1,0 +1,29 @@
+:root {
+  font-family: 'Avenir Next', 'PingFang SC', sans-serif;
+  font-synthesis: none;
+}
+
+html,
+body,
+#storybook-root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.rmc-docs-theme {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 1px;
+  color: var(--text-primary, #1f1f1f);
+  background: var(--bg-base, #f5f5f5);
+  transition:
+    color 250ms ease,
+    background-color 250ms ease;
+}
+
+.rmc-docs-theme--dark {
+  color-scheme: dark;
+}

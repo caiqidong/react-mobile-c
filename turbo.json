@@ -1,5 +1,9 @@
 {
   "tasks": {
+    "@react-mobile-c/docs#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["storybook-static/**"]
+    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]

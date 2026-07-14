@@ -1,0 +1,134 @@
+.token-catalog {
+  min-height: 100vh;
+  padding: 48px clamp(20px, 6vw, 80px) 80px;
+  color: inherit;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, currentColor 5%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.token-header {
+  margin-bottom: 48px;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.token-header p {
+  margin: 0 0 8px;
+  color: #1677ff;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.token-header h1 {
+  margin: 0 0 24px;
+  font-family: Georgia, 'Songti SC', serif;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.token-section {
+  margin-top: 40px;
+}
+
+.token-section h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+}
+
+.color-grid,
+.effect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.color-token,
+.effect-token {
+  display: grid;
+  min-width: 0;
+  padding: 12px;
+  gap: 8px;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, Canvas 94%, transparent);
+}
+
+.color-swatch {
+  height: 76px;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 3px;
+}
+
+.token-catalog strong {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+
+.token-catalog code {
+  overflow-wrap: anywhere;
+  color: color-mix(in srgb, currentColor 62%, transparent);
+  font-size: 11px;
+}
+
+.token-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.scale-list {
+  display: grid;
+  gap: 4px;
+}
+
+.scale-token {
+  display: grid;
+  grid-template-columns: 56px minmax(72px, 1fr) minmax(72px, auto);
+  min-height: 44px;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.scale-preview {
+  max-width: 52px;
+  background: #1677ff;
+}
+
+.scale-preview--width {
+  height: 8px;
+}
+
+.scale-preview--fontSize {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+}
+
+.scale-preview--borderRadius {
+  width: 40px;
+  height: 28px;
+}
+
+.effect-token {
+  min-height: 76px;
+  justify-content: end;
+}
+
+@media (max-width: 760px) {
+  .token-catalog {
+    padding-top: 32px;
+  }
+
+  .token-columns {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .token-header h1 {
+    font-size: 34px;
+  }
+}

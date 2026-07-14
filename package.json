@@ -5,12 +5,14 @@
   "packageManager": "pnpm@9.15.9",
   "scripts": {
     "build": "turbo run build && node scripts/verify-build.mjs",
+    "build:storybook": "pnpm --filter @react-mobile-c/docs build",
     "clean": "turbo run clean",
     "dev": "turbo run dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",
     "prepare": "husky",
+    "storybook": "pnpm --filter @react-mobile-c/docs storybook",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck"
   },
