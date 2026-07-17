@@ -4,10 +4,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
-  addons: ['@storybook/addon-essentials', '@storybook/addon-a11y'],
-  docs: {
-    autodocs: 'tag',
-  },
+  addons: ['@storybook/addon-a11y'],
   framework: {
     name: '@storybook/react-vite',
     options: {},
